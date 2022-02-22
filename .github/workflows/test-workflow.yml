@@ -1,0 +1,33 @@
+name: Test Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  step1:
+    runs-on: ubuntu-latest
+    services:
+      database:
+        image: postgres
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - "5432:5432"
+    steps:
+      - name: after print
+        run: echo "Database up"
+  step2:
+    runs-on: ubuntu-latest
+    needs: step1
+    steps:
+      - name: before
+        run: echo "Pinging database localhost:5432 ..."
+      - name: curl-database
+        run: curl http://localhost:5432
