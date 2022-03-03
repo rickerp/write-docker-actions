@@ -34,7 +34,7 @@ on:
             {
               "app": "survey",
               "language": "python"
-            },
+            }
           ]
         required: true
         type: string
