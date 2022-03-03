@@ -11,16 +11,33 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
-      arg-one:
-        type: string
+      apps:
+        description: 'Stringified list of app-language objects to build (e.g. [{"app": "my-app", "language": "python"}])'
+        default: >-
+          [
+            {
+              "app": "auth",
+              "language": "python"
+            },
+            {
+              "app": "note",
+              "language": "node"
+            },
+            {
+              "app": "notification",
+              "language": "python"
+            },
+            {
+              "app": "sticky",
+              "language": "python"
+            },
+            {
+              "app": "survey",
+              "language": "python"
+            },
+          ]
         required: true
-        default: default-value-for-arg-one
-      arg-two:
         type: string
-        required: true
-      arg-three:
-        type: string
-        required: false
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -33,9 +50,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - run: echo "ALL='${{ github.event.inputs }}'"
-      - run: echo "1='${{ github.event.inputs.arg-one }}'"
-      - run: echo "2='${{ github.event.inputs.arg-two }}'"
-      - run: echo "3='${{ github.event.inputs.arg-three }}'"
+      - run: echo "1='${{ github.event.inputs.apps }}'"
       - run: echo "ENV-1?='$INPUT_ARG_ONE'"
         
 
