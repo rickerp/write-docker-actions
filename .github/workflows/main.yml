@@ -32,7 +32,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - run: echo "DEBUG = ${{ github.event.inputs }}"
+      - run: echo "ALL=`${{ github.event.inputs }}`"
+      - run: echo "1=`${{ github.event.inputs.arg-one }}`"
+      - run: echo "2=`${{ github.event.inputs.arg-two }}`"
+      - run: echo "3=`${{ github.event.inputs.arg-three }}`"
         
 
 
