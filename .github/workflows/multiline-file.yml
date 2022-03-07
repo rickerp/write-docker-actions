@@ -81,4 +81,13 @@ jobs:
         run: |
           echo $VAR4
           echo "$VAR4"
-        
+          
+      - name: play
+        if: always()
+        run: |
+          VAR0=$(sed 's/./& /g' <<< ${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}) >> $GITHUB_ENV
+          echo $VAR0
+          
+      - name: play 2
+        if: always()
+        run: echo $VAR0
