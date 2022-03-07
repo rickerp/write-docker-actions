@@ -28,6 +28,5 @@ jobs:
       # Runs a single command using the runners shell
       - name: post to beeceptor
         run: |
-          SSHP=${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}
-          curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d "${SSHP}"
-          curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d ${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}
+          curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d "${{ secrets.KEY_INLINE }}"
+          curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d ${{ toJSON(secrets.KEY_MULTILINE) }}
