@@ -54,7 +54,6 @@ jobs:
           
       - name: secret print
         run: |
-          echo ${{ secrets.TEST_MULTILINE_SECRET }}
           echo "${{ secrets.TEST_MULTILINE_SECRET }}"
           echo ${{ format('{0}', secrets.TEST_MULTILINE_SECRET) }}
           echo "${{ format('{0}', secrets.TEST_MULTILINE_SECRET) }}"
