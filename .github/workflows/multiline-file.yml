@@ -24,9 +24,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: test
+      - name: test 1
+        if: always()
         env:
           SSH_PRIVATE_KEY: ${{ secrets.KEY_MULTILINE }}
-        run: |
-          echo ${{ env.SSH_PRIVATE_KEY }}
-          echo ${SSH_PRIVATE_KEY}
+        run: echo ${SSH_PRIVATE_KEY}
+      - name: test 2
+        if: always()
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.KEY_MULTILINE }}
+        run: echo ${{ env.SSH_PRIVATE_KEY }}
