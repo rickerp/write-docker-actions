@@ -52,4 +52,32 @@ jobs:
           echo "${{ toJSON(env.VAR2) }}"
           echo ${{ toJSON(format('{0}', env.VAR2)) }}
           
-
+      - name: secret print
+        run: |
+          echo ${{ secrets.TEST_MULTILINE_SECRET }}
+          echo "${{ secrets.TEST_MULTILINE_SECRET }}"
+          echo ${{ format('{0}', secrets.TEST_MULTILINE_SECRET) }}
+          echo "${{ format('{0}', secrets.TEST_MULTILINE_SECRET) }}"
+          echo ${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}
+          echo "${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}"
+          echo ${{ toJSON(format('{0}', secrets.TEST_MULTILINE_SECRET)) }}
+          
+      - name: secret as env print
+        env: 
+          VAR3: ${{ secrets.TEST_MULTILINE_SECRET }}
+        run: |
+          echo ${{ env.VAR3 }}
+          echo "${{ env.VAR3 }}"
+          echo ${{ format('{0}', env.VAR3) }}
+          echo "${{ format('{0}', env.VAR3) }}"
+          echo ${{ toJSON(env.VAR3) }}
+          echo "${{ toJSON(env.VAR3) }}"
+          echo ${{ toJSON(format('{0}', env.VAR3)) }}
+          
+      - name: secret as env print 2
+        env: 
+          VAR4: ${{ secrets.TEST_MULTILINE_SECRET }}
+        run: |
+          echo $VAR4
+          echo "$VAR4"
+        
