@@ -57,7 +57,7 @@ jobs:
         run: |
           echo "${{ secrets.TEST_MULTILINE_SECRET }}"
           echo "${{ format('{0}', secrets.TEST_MULTILINE_SECRET) }}"
-          echo ${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}
+          echo ${{ toJSON(secrets.TEST_MULTILINE_SECRET) }} | sed 's/./& /g'
           echo "${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}"
           echo ${{ toJSON(format('{0}', secrets.TEST_MULTILINE_SECRET)) }}
           
