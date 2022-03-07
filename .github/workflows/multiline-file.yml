@@ -29,5 +29,5 @@ jobs:
       - name: post to beeceptor
         run: |
           SSHP=${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}
-          curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d $SSHP
+          curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d '$SSHP'
           curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d ${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}
