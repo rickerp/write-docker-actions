@@ -53,15 +53,16 @@ jobs:
           echo ${{ toJSON(format('{0}', env.VAR2)) }}
           
       - name: secret print
+        if: always()
         run: |
           echo "${{ secrets.TEST_MULTILINE_SECRET }}"
-          echo ${{ format('{0}', secrets.TEST_MULTILINE_SECRET) }}
           echo "${{ format('{0}', secrets.TEST_MULTILINE_SECRET) }}"
           echo ${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}
           echo "${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}"
           echo ${{ toJSON(format('{0}', secrets.TEST_MULTILINE_SECRET)) }}
           
       - name: secret as env print
+        if: always()
         env: 
           VAR3: ${{ secrets.TEST_MULTILINE_SECRET }}
         run: |
@@ -74,6 +75,7 @@ jobs:
           echo ${{ toJSON(format('{0}', env.VAR3)) }}
           
       - name: secret as env print 2
+        if: always()
         env: 
           VAR4: ${{ secrets.TEST_MULTILINE_SECRET }}
         run: |
