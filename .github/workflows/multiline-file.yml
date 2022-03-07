@@ -26,7 +26,25 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: post to beeceptor
+#       - name: post to beeceptor
+#         run: |
+#           curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d "${{ secrets.KEY_INLINE }}"
+#           curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d ${{ toJSON(secrets.KEY_MULTILINE) }}
+
+      - name: test 1
+        if: always()
         run: |
-          curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d "${{ secrets.KEY_INLINE }}"
-          curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d ${{ toJSON(secrets.KEY_MULTILINE) }}
+          echo ${{ secrets.KEY_MULTILINE }}
+          echo "${{ secrets.KEY_MULTILINE }}"
+      
+      - name: test 2
+        if: always()
+        run: |
+          echo ${{ toJSON(secrets.KEY_MULTILINE) }}
+          echo ${{ fromJSON(toJSON(secrets.KEY_MULTILINE)) }}
+          
+      - name: test 3
+        if: always()
+        run: |
+          echo ${{ fromJSON(secrets.KEY_MULTILINE) }}
+          echo ${{ toJSON(fromJSON(secrets.KEY_MULTILINE)) }}
