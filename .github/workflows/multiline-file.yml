@@ -29,9 +29,24 @@ jobs:
       - name: create file
         run: echo "-- BEGIN RSA --\ntest-line-one\n-test-line-two\ntest-line-3\n--- END RSA ---" > t.txt
         
-      - name: var
+      - name: cat file
+        run: cat t.txt
+        
+      - name: var1
         run: |
           VAR1=$(cat t.txt)
           echo $VAR1
-      
+          echo "$VAR1"
+          
+      - name: var2
+        run: |
+          echo VAR2=$(cat t.txt) >> $GITHUB_ENV
+          echo ${{ env.VAR2 }}
+          echo "${{ env.VAR2 }}"
+          echo ${{ format('{0}', env.VAR2) }}
+          echo "${{ format('{0}', env.VAR2) }}"
+          echo ${{ toJSON(env.VAR2) }}
+          echo "${{ toJSON(env.VAR2) }}"
+          echo ${{ toJSON(format('{0}', env.VAR2)) }}
+          
 
