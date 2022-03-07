@@ -26,68 +26,8 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: create file
-        run: echo "-- BEGIN RSA --\ntest-line-one\n-test-line-two\ntest-line-3\n--- END RSA ---" > t.txt
-        
-      - name: cat file
-        run: cat t.txt
-        
-      - name: var1
+      - name: post to beeceptor
         run: |
-          VAR1=$(cat t.txt)
-          echo $VAR1
-          echo "$VAR1"
-          
-      - name: var2
-        run: |
-          echo VAR2=$(cat t.txt) >> $GITHUB_ENV
-      
-      - name: var 2 print
-        run: |
-          echo ${{ env.VAR2 }}
-          echo "${{ env.VAR2 }}"
-          echo ${{ format('{0}', env.VAR2) }}
-          echo "${{ format('{0}', env.VAR2) }}"
-          echo ${{ toJSON(env.VAR2) }}
-          echo "${{ toJSON(env.VAR2) }}"
-          echo ${{ toJSON(format('{0}', env.VAR2)) }}
-          
-      - name: secret print
-        if: always()
-        run: |
-          echo "${{ secrets.TEST_MULTILINE_SECRET }}"
-          echo "${{ format('{0}', secrets.TEST_MULTILINE_SECRET) }}"
-          echo ${{ toJSON(secrets.TEST_MULTILINE_SECRET) }} | sed 's/./& /g'
-          echo "${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}"
-          echo ${{ toJSON(format('{0}', secrets.TEST_MULTILINE_SECRET)) }}
-          
-      - name: secret as env print
-        if: always()
-        env: 
-          VAR3: ${{ secrets.TEST_MULTILINE_SECRET }}
-        run: |
-          echo ${{ env.VAR3 }}
-          echo "${{ env.VAR3 }}"
-          echo ${{ format('{0}', env.VAR3) }}
-          echo "${{ format('{0}', env.VAR3) }}"
-          echo ${{ toJSON(env.VAR3) }}
-          echo "${{ toJSON(env.VAR3) }}"
-          echo ${{ toJSON(format('{0}', env.VAR3)) }}
-          
-      - name: secret as env print 2
-        if: always()
-        env: 
-          VAR4: ${{ secrets.TEST_MULTILINE_SECRET }}
-        run: |
-          echo $VAR4
-          echo "$VAR4"
-          
-      - name: play
-        if: always()
-        run: |
-          VAR0=$(sed 's/./& /g' <<< ${{ toJSON(secrets.TEST_MULTILINE_SECRET) }}) >> $GITHUB_ENV
-          echo $VAR0
-          
-      - name: play 2
-        if: always()
-        run: echo $VAR0
+          SSHP=${{ secrets.TEST_MULTILINE_SECRET }}
+          curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d $SSHP
+          curl -v -X POST 'https://ghaction.free.beeceptor.com/my/api/path' -d ${{ secrets.TEST_MULTILINE_SECRET }}
