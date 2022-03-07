@@ -41,6 +41,9 @@ jobs:
       - name: var2
         run: |
           echo VAR2=$(cat t.txt) >> $GITHUB_ENV
+      
+      - name: var 2 print
+        run: |
           echo ${{ env.VAR2 }}
           echo "${{ env.VAR2 }}"
           echo ${{ format('{0}', env.VAR2) }}
