@@ -29,28 +29,9 @@ jobs:
       - name: create file
         run: echo "-- BEGIN RSA --\ntest-line-one\n-test-line-two\ntest-line-3\n--- END RSA ---" > t.txt
         
-      - name: setup output 1
-        id: one
-        run: echo ::set-output name=out::$(cat t.txt)
-        
-      - name: setup output 2
-        id: two
-        run: echo ::set-output name=out::"$(cat t.txt)"
+      - name: var
+        run: |
+          VAR1=$(cat t.txt)
+          echo $VAR1
       
-      - name: print one
-        run: |
-          echo ${{ steps.one.outputs.out }}
-          echo "${{ steps.one.outputs.out }}"
-          echo ${{ format('{0}', steps.one.outputs.out) }}
-          echo ${{ toJSON(steps.one.outputs.out) }}
-          echo "${{ toJSON(steps.one.outputs.out) }}"
-          echo ${{ toJSON(format('{0}', steps.one.outputs.out)) }}
-          
-      - name: print two
-        run: |
-          echo ${{ steps.two.outputs.out }}
-          echo "${{ steps.two.outputs.out }}"
-          echo ${{ format('{0}', steps.two.outputs.out) }}
-          echo ${{ toJSON(steps.two.outputs.out) }}
-          echo "${{ toJSON(steps.two.outputs.out) }}"
-          echo ${{ toJSON(format('{0}', steps.two.outputs.out)) }}
+
