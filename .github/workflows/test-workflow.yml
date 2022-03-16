@@ -13,6 +13,6 @@ jobs:
       VAR2: ($VAR)
     steps:
       - name: var
-        run: echo ${{ env.VAR }} | $VAR
+        run: echo "${{ env.VAR }} | $VAR"
       - name: var2
-        run: echo ${{ env.VAR2 }} | $VAR2
+        run: echo "${{ env.VAR2 }} | $VAR2"
