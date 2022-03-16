@@ -6,28 +6,14 @@ on:
 jobs:
   step1:
     runs-on: ubuntu-latest
-    services:
-      database:
-        image: postgres
-        env:
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ env.POSTGRES_DB }}
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - "5432:5432"
+    env:
+      VAR: value
+      VAR1: ${{ env.VAR }}
+      VAR2: $VAR
     steps:
-      - name: after print
-        run: echo "Database up"
-  step2:
-    runs-on: ubuntu-latest
-    needs: step1
-    steps:
-      - name: before
-        run: echo "Pinging database localhost:5432 ..."
-      - name: curl-database
-        run: curl http://localhost:5432
+      - name: var
+        run: echo ${{ env.VAR }} | $VAR
+      - name: var1
+        run: echo ${{ env.VAR1 }} | $VAR1
+      - name: var2
+        run: echo ${{ env.VAR2 }} | $VAR2
