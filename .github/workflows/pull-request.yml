@@ -1,0 +1,14 @@
+name: Pull Request CI
+
+on:
+  pull_request:
+    branches: [main]
+    
+jobs:
+  check-number:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print PR number 1
+        run: echo ${{ github.event.number }}
+      - name: PR
+        run: echo ${{ github.ref }}
