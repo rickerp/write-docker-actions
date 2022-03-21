@@ -1,6 +1,8 @@
 name: Test Workflow
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       environment:
@@ -17,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: [${{ github.event.inputs.environment || 'staging' }}]
+        environment: ${{ fromJSON(format('["{0}"]', github.event.inputs.environment || 'staging')) }}
     env:
       VAR: value
       VAR2: ($VAR)
