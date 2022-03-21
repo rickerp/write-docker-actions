@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: ${{ [github.event.inputs.environment || 'staging'] }}
+        environment: [${{ github.event.inputs.environment || 'staging' }}]
     env:
       VAR: value
       VAR2: ($VAR)
