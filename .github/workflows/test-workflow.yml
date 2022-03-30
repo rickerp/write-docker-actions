@@ -3,32 +3,15 @@ name: Test Workflow
 on:
   push:
     branches: [main]
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: The environment to deploy to
-        type: choice
-        options:
-          - staging
-          - production
-        default: staging
-        required: true
 
 jobs:
   step1:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        environment: ${{ fromJSON(format('["{0}"]', github.event.inputs.environment || 'staging')) }}
     env:
-      VAR: value
-      VAR2: ($VAR)
+      ARR1: ${{ '["auth","graphql","note","notification","sticky","survey"]' }}
+      ARR2: ${{ fromJSON('["auth","graphql","note","notification","sticky","survey"]') }}
     steps:
-      - run: pwd
-      - run: ls -lah .
-      - run: ls -lah ..
-      - name: Clone sticky-be repository
-        uses: actions/checkout@v2
-      - run: pwd
-      - run: ls -lah .
-      - run: ls -lah ..
+      - run: echo ${{ env.ARR1 }}
+      - run: echo ${{ env.ARR2 }}
+      - run: echo $ARR1
+      - run: echo $ARR2
