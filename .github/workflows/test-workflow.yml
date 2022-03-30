@@ -8,9 +8,8 @@ jobs:
   step1:
     runs-on: ubuntu-latest
     env:
-      ARR1: ${{ '["auth","graphql","note","notification","sticky","survey"]' }}
+      ARR: ${{ '("auth" "graphql" "note" "notification" "sticky" "survey")' }}
     steps:
-      - run: echo ${{ env.ARR1 }}
-      - run: echo $ARR1
-      - run: echo ${{ fromJSON('["auth","graphql","note","notification","sticky","survey"]') }}
-      - run: echo ${{ fromJSON(env.ARR1) }}
+      - run: echo $ARR
+      - run: |
+          for elem in "${ARR[@]}"; do echo $elem ; done
