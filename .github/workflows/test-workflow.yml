@@ -24,7 +24,11 @@ jobs:
       VAR: value
       VAR2: ($VAR)
     steps:
-      - name: var
-        run: echo "${{ env.VAR }} | $VAR"
-      - name: var2
-        run: echo "${{ env.VAR2 }} | $VAR2"
+      - run: pwd
+      - run: ls -lah .
+      - run: ls -lah ..
+      - name: Clone sticky-be repository
+        uses: actions/checkout@v2
+      - run: pwd
+      - run: ls -lah .
+      - run: ls -lah ..
