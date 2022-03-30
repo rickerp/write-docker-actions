@@ -12,4 +12,5 @@ jobs:
     steps:
       - run: echo $ARR
       - run: |
-          for elem in "${ARR[@]}"; do echo $elem ; done
+          ARR2=${{ env.ARR }}
+          for elem in "${ARR2[@]}"; do echo $elem ; done
