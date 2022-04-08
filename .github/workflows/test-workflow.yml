@@ -8,9 +8,8 @@ jobs:
   step1:
     runs-on: ubuntu-latest
     env:
-      ARR: ${{ '("auth" "graphql" "note" "notification" "sticky" "survey")' }}
+      VAR: one
     steps:
-      - run: echo $ARR
-      - run: |
-          ARR=${{ env.ARR }}
-          for elem in "${ARR[@]}"; do echo $elem ; done
+      - id: step1
+        run: echo """::set-output name:one::1.0.12"""
+      - run: echo ${{ steps.step1.outputs[env.VAR] }}
