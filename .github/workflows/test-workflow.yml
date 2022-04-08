@@ -11,5 +11,5 @@ jobs:
       VAR: one
     steps:
       - id: step1
-        run: echo """::set-output name:one::1.0.12"""
+        run: echo """::set-output name=one::1.0.12"""
       - run: echo ${{ steps.step1.outputs[env.VAR] }}
